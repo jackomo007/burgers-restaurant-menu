@@ -16,8 +16,6 @@ const initialState: MenuState = {
 };
 
 export const fetchMenu = createAsyncThunk("menu/fetchMenu", async () => {
-  console.log("OK");
-
   const response = await fetchMenuApi();
   return response as Menu;
 });

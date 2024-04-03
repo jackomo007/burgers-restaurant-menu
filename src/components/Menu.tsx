@@ -3,6 +3,27 @@ import React, { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import { fetchMenu } from "../features/menu/menuSlice";
 import { Section } from "../types/menuTypes";
+import styled from "styled-components";
+
+const MenuCarousel = styled.div`
+  display: flex;
+  margin-bottom: 20px;
+  height: 120px;
+  align-items: center;
+  padding: 24px;
+`;
+
+const CarouselItem = styled.div`
+  width: 104px;
+  height: 146px;
+  gap: 19px;
+`;
+
+const CarouselImage = styled.img`
+  width: 74px;
+  height: 74px;
+  border-radius: 50%;
+`;
 
 const MenuComponent: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -20,19 +41,21 @@ const MenuComponent: React.FC = () => {
   if (menuStatus === "failed") return <div>Error loading the menu.</div>;
 
   return (
-    <div>
-      AAAAA
+    <MenuCarousel>
       {menuStatus === "succeeded" && menu && (
-        <ul>
-          {menu.sections.map(
-            (section: Section, index) => (
-              <li key={index}>{section.name}</li>
-            )
-            // section.items.map((item, index) => <li key={index}>{item.name}</li>)
-          )}
-        </ul>
+        <>
+          {menu.sections.map((section: Section, index) => (
+            <CarouselItem key={index}>
+              <CarouselImage
+                src={section.images[0].image}
+                alt={`${section.images[0].id}`}
+              />
+              {section.name}
+            </CarouselItem>
+          ))}
+        </>
       )}
-    </div>
+    </MenuCarousel>
   );
 };
 
