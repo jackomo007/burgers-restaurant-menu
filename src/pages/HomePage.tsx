@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import MenuComponent from "../components/Menu";
 
 const Container = styled.div`
   display: flex;
@@ -126,6 +127,8 @@ const HomePage = () => {
               Desserts
             </CarouselItem>
           </MenuCarousel>
+          <MenuComponent />
+
           <MenuCard>
             <MenuHeader>
               <h3>Burgers</h3>
@@ -141,7 +144,6 @@ const HomePage = () => {
                 alt="Hardcore Burger"
               />
             </MenuItem>
-            {/* More items... */}
           </MenuCard>
           <MenuCard>
             <MenuHeader>
