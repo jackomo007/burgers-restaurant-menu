@@ -1,12 +1,23 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { RootState } from "../store";
-import { selectTotalPrice } from "../features/order/orderSlice";
+import CartItemComponent from "./CartItemComponent";
+import { selectCartItems, selectCartTotal } from "../features/cart/cartSlice";
 
-const Cart: React.FC = () => {
-  const totalPrice = useSelector((state: RootState) => selectTotalPrice(state));
+const CartComponent: React.FC = () => {
+  const cartItems = useSelector(selectCartItems);
+  const total = useSelector(selectCartTotal);
 
-  return <div>Total Price: ${totalPrice.toFixed(2)}</div>;
+  return (
+    <div>
+      <h1>Carrinho</h1>
+      {cartItems.map((item) => (
+        <CartItemComponent key={item.id} item={item} />
+      ))}
+      <div>
+        <strong>Total: R$ {total.toFixed(2)}</strong>
+      </div>
+    </div>
+  );
 };
 
-export default Cart;
+export default CartComponent;

@@ -19,7 +19,8 @@ import {
 } from "../styles/StyledModal";
 import { AppDispatch } from "../store";
 import { useDispatch } from "react-redux";
-import { updateTotalPrice } from "../features/order/orderSlice";
+import { addItemToCart } from "../features/cart/cartSlice";
+import { CartItem } from "../types/cartTypes";
 
 interface ProductModalProps {
   isOpen: boolean;
@@ -60,7 +61,7 @@ const ProductModal: React.FC<ProductModalProps> = ({
     defaultBurgerOption
   );
 
-  const [quantity, setQuantity] = useState<number>(1);
+  const [quantity, setQuantity] = useState<number>(0);
 
   const [totalPrice, setTotalPrice] = useState<number>(0);
 
@@ -69,10 +70,6 @@ const ProductModal: React.FC<ProductModalProps> = ({
       setTotalPrice(selectedSize.price * quantity);
     }
   }, [selectedSize, quantity]);
-
-  useEffect(() => {
-    dispatch(updateTotalPrice(totalPrice));
-  }, [totalPrice, dispatch]);
 
   const handleSizeChange = (option: BurgerOption) => {
     const safeOption: BurgerOption = {
@@ -90,7 +87,18 @@ const ProductModal: React.FC<ProductModalProps> = ({
   };
 
   const handleAddToOrder = () => {
-    // Logic to add to order
+    if (selectedSize && quantity > 0) {
+      const itemToAdd: CartItem = {
+        id: String(selectedSize.id),
+        name: selectedItem.name + " - " + selectedSize.name,
+        price: selectedSize.price,
+        quantity,
+        total: totalPrice,
+        additionalInfo: selectedItem.description || "",
+      };
+
+      dispatch(addItemToCart(itemToAdd));
+    }
     onClose();
   };
 
@@ -103,10 +111,12 @@ const ProductModal: React.FC<ProductModalProps> = ({
       <ModalWrapper>
         <CloseButton onClick={onClose}>&times;</CloseButton>
         <ModalContent>
-          <ItemImage
-            src={selectedItem.images[0].image}
-            alt={`${selectedItem.images[0].id}`}
-          />
+          {selectedItem.images && selectedItem.images.length > 0 && (
+            <ItemImage
+              src={selectedItem.images[0].image}
+              alt={`${selectedItem.images[0].id}`}
+            />
+          )}
           <Title>{selectedItem.name}</Title>
           <Description>{selectedItem.description}</Description>
           <OptionsForm>
