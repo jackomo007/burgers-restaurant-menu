@@ -16,18 +16,20 @@ import messages_en from "./intl/locales/en.json";
 import messages_pt from "./intl/locales/pt.json";
 import { language } from "./utils/index.tsx";
 
-const messages: Messages = {
+export const messages: Messages = {
   en: messages_en,
   pt: messages_pt,
 };
 const currentMessages = messages[language] || messages.en;
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
-    <IntlProvider locale={language} messages={currentMessages}>
-      <Provider store={store}>
-        <App />
-      </Provider>
-    </IntlProvider>
-  </React.StrictMode>
-);
+if (typeof window !== "undefined" && document.getElementById("root")) {
+  ReactDOM.createRoot(document.getElementById("root")!).render(
+    <React.StrictMode>
+      <IntlProvider locale={language} messages={currentMessages}>
+        <Provider store={store}>
+          <App />
+        </Provider>
+      </IntlProvider>
+    </React.StrictMode>
+  );
+}
