@@ -8,6 +8,7 @@ import {
   ModalContent,
   ModalWrapper,
   OptionsForm,
+  ModifierHeader,
   QuantityButton,
   QuantityInput,
   QuantityWrapper,
@@ -19,7 +20,8 @@ import {
 } from "../styles/StyledModal";
 import { AppDispatch } from "../store";
 import { useDispatch } from "react-redux";
-import { updateTotalPrice } from "../features/order/orderSlice";
+import { addItemToCart } from "../features/cart/cartSlice";
+import { CartItem } from "../types/cartTypes";
 
 interface ProductModalProps {
   isOpen: boolean;
@@ -60,7 +62,7 @@ const ProductModal: React.FC<ProductModalProps> = ({
     defaultBurgerOption
   );
 
-  const [quantity, setQuantity] = useState<number>(1);
+  const [quantity, setQuantity] = useState<number>(0);
 
   const [totalPrice, setTotalPrice] = useState<number>(0);
 
@@ -69,10 +71,6 @@ const ProductModal: React.FC<ProductModalProps> = ({
       setTotalPrice(selectedSize.price * quantity);
     }
   }, [selectedSize, quantity]);
-
-  useEffect(() => {
-    dispatch(updateTotalPrice(totalPrice));
-  }, [totalPrice, dispatch]);
 
   const handleSizeChange = (option: BurgerOption) => {
     const safeOption: BurgerOption = {
@@ -90,7 +88,18 @@ const ProductModal: React.FC<ProductModalProps> = ({
   };
 
   const handleAddToOrder = () => {
-    // Logic to add to order
+    if (selectedSize && quantity > 0) {
+      const itemToAdd: CartItem = {
+        id: String(selectedSize.id),
+        name: selectedItem.name + " - " + selectedSize.name,
+        price: selectedSize.price,
+        quantity,
+        total: totalPrice,
+        additionalInfo: selectedItem.description || "",
+      };
+
+      dispatch(addItemToCart(itemToAdd));
+    }
     onClose();
   };
 
@@ -103,19 +112,30 @@ const ProductModal: React.FC<ProductModalProps> = ({
       <ModalWrapper>
         <CloseButton onClick={onClose}>&times;</CloseButton>
         <ModalContent>
-          <ItemImage
-            src={selectedItem.images[0].image}
-            alt={`${selectedItem.images[0].id}`}
-          />
+          {selectedItem.images && selectedItem.images.length > 0 && (
+            <ItemImage
+              src={selectedItem.images[0].image}
+              alt={`${selectedItem.images[0].id}`}
+            />
+          )}
           <Title>{selectedItem.name}</Title>
           <Description>{selectedItem.description}</Description>
           <OptionsForm>
             {selectedItem.modifiers &&
               selectedItem.modifiers.map((modifier, modifierIndex) => (
                 <div key={modifierIndex}>
-                  {modifier.name}
+                  <ModifierHeader>
+                    <span>{modifier.name}</span>
+                    <p>Select 1 option</p>
+                  </ModifierHeader>
                   {modifier.items.map((option, index) => (
                     <SizeOptionLabel key={index}>
+                      <div>
+                        <span>{option.name}</span>
+                        <SizeOptionPrice>
+                          R$ {option.price.toFixed(2)}
+                        </SizeOptionPrice>
+                      </div>
                       <SizeOptionRadio
                         type="radio"
                         name="burgerSize"
@@ -127,10 +147,6 @@ const ProductModal: React.FC<ProductModalProps> = ({
                         }
                         onChange={() => handleSizeChange(option)}
                       />
-                      {option.name}
-                      <SizeOptionPrice>
-                        R$ {option.price.toFixed(2)}
-                      </SizeOptionPrice>
                     </SizeOptionLabel>
                   ))}
                 </div>
@@ -142,6 +158,7 @@ const ProductModal: React.FC<ProductModalProps> = ({
                 const newQuantity = quantity - 1;
                 newQuantity >= 0 && setQuantity(newQuantity);
               }}
+              data-icon="minus"
             >
               -
             </QuantityButton>
@@ -156,6 +173,7 @@ const ProductModal: React.FC<ProductModalProps> = ({
                 const newQuantity = quantity + 1;
                 setQuantity(newQuantity);
               }}
+              data-icon="plus"
             >
               +
             </QuantityButton>
