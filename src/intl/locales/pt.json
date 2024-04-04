@@ -1,5 +1,9 @@
 {
-  "greeting": "Oi",
-  "farewell": "Adeus",
-  "cart": "Carrinho"
+  "cart": "Carrinho",
+  "login": "Entrar",
+  "contact": "Contato",
+  "search_placeholder": "Pesquise aqui o item do menu",
+  "food": "Hambúrguer",
+  "drink": "Bebidas",
+  "dessert": "Sobremesa"
 }

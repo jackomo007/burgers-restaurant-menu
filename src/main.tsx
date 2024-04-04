@@ -14,13 +14,12 @@ interface Messages {
 
 import messages_en from "./intl/locales/en.json";
 import messages_pt from "./intl/locales/pt.json";
+import { language } from "./utils/index.tsx";
 
 const messages: Messages = {
   en: messages_en,
   pt: messages_pt,
 };
-
-const language = navigator.language.split(/[-_]/)[0];
 const currentMessages = messages[language] || messages.en;
 
 ReactDOM.createRoot(document.getElementById("root")!).render(

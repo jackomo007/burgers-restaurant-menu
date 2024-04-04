@@ -1,5 +1,9 @@
 {
-  "greeting": "Hello",
-  "farewell": "Goodbye",
-  "cart": "Basket"
+  "cart": "Basket",
+  "login": "Login",
+  "contact": "Contact",
+  "search_placeholder": "Search menu items",
+  "food": "Burguers",
+  "drink": "Drinks",
+  "dessert": "Desserts"
 }

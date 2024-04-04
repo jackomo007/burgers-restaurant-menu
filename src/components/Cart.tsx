@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import CartItemComponent from "./CartItemComponent";
 import { selectCartItems, selectCartTotal } from "../features/cart/cartSlice";
 import { FormattedNumber, useIntl } from "react-intl";
+import { currency } from "../utils";
 
 const CartComponent: React.FC = () => {
   const intl = useIntl();
@@ -22,7 +23,7 @@ const CartComponent: React.FC = () => {
         <FormattedNumber
           value={+total.toFixed(2)}
           style="currency"
-          currency="USD"
+          currency={currency}
         />
       </div>
     </div>

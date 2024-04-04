@@ -9,9 +9,14 @@ import {
   LogoOverlay,
   Image,
 } from "../styles/StyledNavbar";
+import { useIntl } from "react-intl";
 
 const NavigationBar: React.FC = () => {
   const activeItem: string = "MENU";
+
+  const intl = useIntl();
+  const login = intl.formatMessage({ id: "login" });
+  const contact = intl.formatMessage({ id: "contact" });
 
   return (
     <Navbar>
@@ -20,10 +25,10 @@ const NavigationBar: React.FC = () => {
           MENU
         </NavItem>
         <NavItem href="#" isActive={activeItem === "ENTRAR"}>
-          ENTRAR
+          {login.toUpperCase()}
         </NavItem>
         <NavItem href="#" isActive={activeItem === "CONTATO"}>
-          CONTATO
+          {contact.toUpperCase()}
         </NavItem>
       </Menu>
 
