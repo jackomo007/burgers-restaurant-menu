@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import MenuComponent from "../components/Menu";
 import MenuCard from "../components/MenuCard";
+import Cart from "../components/Cart";
 
 const Container = styled.div`
   display: flex;
@@ -67,6 +68,7 @@ const HomePage = () => {
         <CartCard>
           <CartTitle>Carrinho</CartTitle>
           <CartContent>Seu carrinho esta vazio</CartContent>
+          <Cart />
         </CartCard>
       </ContainerContent>
     </Container>
