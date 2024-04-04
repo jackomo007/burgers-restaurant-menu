@@ -2,6 +2,7 @@ import styled from "styled-components";
 import MenuComponent from "../components/Menu";
 import MenuCard from "../components/MenuCard";
 import Cart from "../components/Cart";
+import { useIntl } from "react-intl";
 
 const Container = styled.div`
   display: flex;
@@ -86,10 +87,12 @@ const CartContent = styled.div`
 `;
 
 const HomePage = () => {
+  const intl = useIntl();
+  const searchPlaceholder = intl.formatMessage({ id: "search_placeholder" });
   return (
     <Container>
       <SearchBarContainer>
-        <StyledSearchBar type="text" placeholder="Search menu items" />
+        <StyledSearchBar type="text" placeholder={searchPlaceholder} />
       </SearchBarContainer>
       <ContainerContent>
         <Content>

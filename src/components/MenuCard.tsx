@@ -3,6 +3,8 @@ import { useAppSelector } from "../hooks";
 import { Section } from "../types/menuTypes";
 import styled from "styled-components";
 import ProductModal from "./Modal";
+import { FormattedNumber } from "react-intl";
+import { currency } from "../utils";
 
 interface ArrowProps {
   isOpen: boolean;
@@ -152,7 +154,11 @@ const MenuCard: React.FC = () => {
                     <ItemInfo>
                       <h4>{item.name}</h4>
                       <p>{item.description}</p>
-                      <p>R${item.price}</p>
+                      <FormattedNumber
+                        value={+item.price.toFixed(2)}
+                        style="currency"
+                        currency={currency}
+                      />
                     </ItemInfo>
                     {item.images && item.images.length > 0 && (
                       <ItemImage
