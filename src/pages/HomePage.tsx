@@ -2,7 +2,6 @@ import styled from "styled-components";
 import MenuComponent from "../components/Menu";
 import MenuCard from "../components/MenuCard";
 import Cart from "../components/Cart";
-import { useIntl } from "react-intl";
 
 const Container = styled.div`
   display: flex;
@@ -61,38 +60,16 @@ const Content = styled.div`
 `;
 
 const CartCard = styled.div`
-  width: 320px;
-  margin: 30px 30px 0 5px;
-  height: 120px;
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.15);
   @media (max-width: 700px) {
     display: none;
   }
 `;
 
-const CartTitle = styled.div`
-  background-color: ${({ theme }) => theme.containerColor};
-  height: 64px;
-  padding-left: 20px;
-  display: flex;
-  align-items: center;
-`;
-
-const CartContent = styled.div`
-  background-color: ${({ theme }) => theme.lightColor};
-  height: 45%;
-  display: flex;
-  padding-left: 20px;
-  align-items: center;
-`;
-
 const HomePage = () => {
-  const intl = useIntl();
-  const searchPlaceholder = intl.formatMessage({ id: "search_placeholder" });
   return (
     <Container>
       <SearchBarContainer>
-        <StyledSearchBar type="text" placeholder={searchPlaceholder} />
+        <StyledSearchBar type="text" placeholder="Search menu items" />
       </SearchBarContainer>
       <ContainerContent>
         <Content>
@@ -100,8 +77,6 @@ const HomePage = () => {
           <MenuCard />
         </Content>
         <CartCard>
-          <CartTitle>Carrinho</CartTitle>
-          <CartContent>Seu carrinho esta vazio</CartContent>
           <Cart />
         </CartCard>
       </ContainerContent>
