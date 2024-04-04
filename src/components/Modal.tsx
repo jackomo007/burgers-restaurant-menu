@@ -72,6 +72,30 @@ const ProductModal: React.FC<ProductModalProps> = ({
     }
   }, [selectedSize, quantity]);
 
+  useEffect(() => {
+    if (
+      selectedItem &&
+      selectedItem.modifiers &&
+      selectedItem.modifiers.length > 0
+    ) {
+      const firstModifier = selectedItem.modifiers[0];
+      if (
+        firstModifier &&
+        firstModifier.items &&
+        firstModifier.items.length > 0
+      ) {
+        handleSizeChange(firstModifier.items[0]);
+      }
+    } else {
+      setSelectedSize({
+        ...defaultBurgerOption,
+        price: selectedItem ? selectedItem.price : 0,
+      });
+      setQuantity(1);
+      setTotalPrice(selectedItem ? selectedItem.price : 0);
+    }
+  }, [selectedItem]);
+
   const handleSizeChange = (option: BurgerOption) => {
     const safeOption: BurgerOption = {
       ...option,
@@ -88,13 +112,16 @@ const ProductModal: React.FC<ProductModalProps> = ({
   };
 
   const handleAddToOrder = () => {
-    if (selectedSize && quantity > 0) {
+    if (selectedItem && quantity > 0) {
+      const price = selectedSize ? selectedSize.price : selectedItem.price;
       const itemToAdd: CartItem = {
-        id: String(selectedSize.id),
-        name: selectedItem.name + " - " + selectedSize.name,
-        price: selectedSize.price,
+        id: String(selectedItem.id),
+        name:
+          selectedItem.name +
+          (selectedSize && selectedSize.name ? " - " + selectedSize.name : ""),
+        price: price,
         quantity,
-        total: totalPrice,
+        total: price * quantity,
         additionalInfo: selectedItem.description || "",
       };
 

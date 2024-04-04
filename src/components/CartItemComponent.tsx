@@ -122,7 +122,7 @@ const CartItemComponent: React.FC<CartItemProps> = ({ item }) => {
         <ItemDetails>
           <ItemName>{item.name}</ItemName>
         </ItemDetails>
-        <ItemPrice>R$ {item.price.toFixed(2)}</ItemPrice>
+        <ItemPrice>R$ {(item.price * item.quantity).toFixed(2)}</ItemPrice>
       </ItemTopRow>
       <ItemQuantity>
         <QuantityButton onClick={handleDecreaseQuantity} data-icon="minus">
