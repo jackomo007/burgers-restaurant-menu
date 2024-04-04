@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useAppSelector } from "../hooks";
-import { Section } from "../types/menuTypes";
+import { MenuItem, Section } from "../types/menuTypes";
 import styled from "styled-components";
 import ProductModal from "./Modal";
 import { FormattedNumber } from "react-intl";
@@ -24,7 +24,7 @@ const MenuHeader = styled.div`
   cursor: pointer;
 `;
 
-const MenuItem = styled.div`
+const StyledMenuItem = styled.div`
   padding: 10px;
   display: flex;
   justify-content: space-between;
@@ -147,7 +147,7 @@ const MenuCard: React.FC = () => {
               </MenuHeader>
               {openSections[index] &&
                 section.items.map((item) => (
-                  <MenuItem
+                  <StyledMenuItem
                     key={item.id}
                     onClick={() => openModalWithItem(item)}
                   >
@@ -166,14 +166,14 @@ const MenuCard: React.FC = () => {
                         alt={`${item.images[0].id}`}
                       />
                     )}
-                  </MenuItem>
+                  </StyledMenuItem>
                 ))}
             </div>
           ))}
           <ProductModal
             isOpen={isModalOpen}
             onClose={closeModal}
-            selectedItem={selectedItem}
+            selectedItem={selectedItem as MenuItem}
           />
         </>
       )}
