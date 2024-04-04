@@ -1,7 +1,8 @@
-import React, { useState, useEffect  } from "react";
+import React, { useState, useEffect } from "react";
 import { useAppSelector } from "../hooks";
 import { Section } from "../types/menuTypes";
 import styled from "styled-components";
+import ProductModal from "./Modal";
 
 interface ArrowProps {
   isOpen: boolean;
@@ -52,18 +53,18 @@ const ItemInfo = styled.div`
       overflow: hidden;
       text-overflow: ellipsis;
       max-width: 350px;
-        @media (max-width: 700px) {
-          max-width: 100%;
-          white-space: normal;
-          overflow: hidden;
-          display: -webkit-box;
-          -webkit-box-orient: vertical;
-          -webkit-line-clamp: 2;
-          text-overflow: ellipsis;
-          padding-right: 20px;
-          box-sizing: border-box;
-          font-size: 14px;
-        }
+      @media (max-width: 700px) {
+        max-width: 100%;
+        white-space: normal;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        text-overflow: ellipsis;
+        padding-right: 20px;
+        box-sizing: border-box;
+        font-size: 14px;
+      }
     }
 
     &:last-of-type {
@@ -88,14 +89,26 @@ const Arrow = styled.i<ArrowProps>`
   margin-left: 5px;
   border: solid black;
   border-width: 0 3px 3px 0;
-  transform: ${({ isOpen }) => (isOpen ? 'rotate(-135deg)' : 'rotate(45deg)')};
+  transform: ${({ isOpen }) => (isOpen ? "rotate(-135deg)" : "rotate(45deg)")};
   transition: transform 0.3s ease-in-out;
 `;
 
 const MenuCard: React.FC = () => {
+  const [isModalOpen, setModalOpen] = useState<boolean>(false);
+  const [selectedItem, setSelectedItem] = useState<unknown>(null);
   const { data: menu, status: menuStatus } = useAppSelector(
     (state) => state.menu
   );
+
+  const openModalWithItem = (item: unknown) => {
+    setSelectedItem(item);
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setSelectedItem(null);
+    setModalOpen(false);
+  };
 
   const [openSections, setOpenSections] = useState<Record<number, boolean>>({});
 
@@ -130,9 +143,12 @@ const MenuCard: React.FC = () => {
                 <h3>{section.name}</h3>
                 <Arrow isOpen={openSections[index] || false} />
               </MenuHeader>
-              {openSections[index] && (
+              {openSections[index] &&
                 section.items.map((item) => (
-                  <MenuItem key={item.id}>
+                  <MenuItem
+                    key={item.id}
+                    onClick={() => openModalWithItem(item)}
+                  >
                     <ItemInfo>
                       <h4>{item.name}</h4>
                       <p>{item.description}</p>
@@ -145,10 +161,14 @@ const MenuCard: React.FC = () => {
                       />
                     )}
                   </MenuItem>
-                ))
-              )}
+                ))}
             </div>
           ))}
+          <ProductModal
+            isOpen={isModalOpen}
+            onClose={closeModal}
+            selectedItem={selectedItem}
+          />
         </>
       )}
     </Card>
