@@ -5,7 +5,7 @@ interface NavItemProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
 }
 
 export const Navbar = styled.nav`
-  background-color: #4f372f;
+  background-color: ${({ theme }) => theme.navBackgroundColour};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -25,18 +25,18 @@ export const NavItem = styled.a<NavItemProps>`
   text-align: center;
 
   &:hover {
-    color: #ddd;
+    color: ${({ theme }) => theme.hoverColour};
   }
 
-  @media (min-width: 400px) {
-    ${({ isActive }) =>
+  @media (min-width: 700px) {
+    ${({ isActive, theme }) =>
       isActive &&
       css`
-        border-bottom: 5px solid #ddd;
+        border-bottom: 5px solid ${theme.hoverColour};
       `}
   }
 
-  @media (max-width: 393px) {
+  @media (max-width: 700px) {
     padding-left: 40px;
   }
 `;
@@ -48,7 +48,7 @@ export const Menu = styled.div`
   height: 52px;
   z-index: 2;
 
-  @media (max-width: 393px) {
+  @media (max-width: 700px) {
     display: none;
   }
 `;
@@ -56,7 +56,7 @@ export const Menu = styled.div`
 export const MobileMenu = styled.div`
   display: none;
 
-  @media (max-width: 393px) {
+  @media (max-width: 700px) {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
@@ -73,36 +73,37 @@ export const GradientOverlay = styled.div`
   bottom: 0;
   background: linear-gradient(
     90deg,
-    #36231c 18.92%,
+    ${({ theme }) => theme.secondaryColor} 18.92%,
     rgba(54, 35, 28, 0) 50.56%,
-    #36231c 80.88%
+    ${({ theme }) => theme.secondaryColor} 80.88%
   );
   z-index: 1;
+
+  @media (max-width: 700px) {
+    display: none;
+  }
 `;
 
 export const ImageContainer = styled.div`
   position: absolute;
-  max-width: 1440px;
+  max-width: 100%;
   width: 100%;
   height: 150px;
   left: 0;
   top: 49px;
   z-index: 0;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
 `;
 
 export const LogoOverlay = styled.img`
   position: absolute;
-  top: 5%;
-  left: 43%;
+  top: 6%;
   width: 188px;
   height: 125px;
   opacity: 85%;
   object-fit: cover;
-  z-index: 2;
-
-  @media (max-width: 393px) {
-    left: 25%;
-  }
 `;
 
 export const Image = styled.img`
@@ -110,4 +111,9 @@ export const Image = styled.img`
   height: 150px;
   object-fit: cover;
   object-position: center;
+  @media (max-width: 700px) {
+    margin-top: -30px;
+    transform: scale(2.5); 
+    transform-origin: center;
+  }
 `;
