@@ -12,7 +12,7 @@ type ProvidersProps = {
 
 const Providers = ({ children }: ProvidersProps) => {
   return (
-    <IntlProvider locale="es" messages={currentMessages}>
+    <IntlProvider locale="en" messages={currentMessages}>
       {children}
     </IntlProvider>
   );
@@ -24,11 +24,7 @@ describe("NavigationBar", () => {
   });
 
   test("should render MENU as active item", () => {
-    render(
-      <IntlProvider locale="en" messages={currentMessages}>
-        <NavigationBar />
-      </IntlProvider>
-    );
+    render(<NavigationBar />, { wrapper: Providers });
 
     const menuItem = screen.getAllByText(/MENU/i);
     expect(menuItem[0]).toBeInTheDocument();
