@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { useAppSelector } from "../hooks";
 import { Section } from "../types/menuTypes";
 import styled from "styled-components";
+import ProductModal from "./Modal";
 
 const Card = styled.div`
   width: 100%;
@@ -37,9 +38,21 @@ const ItemImage = styled.img`
 `;
 
 const MenuCard: React.FC = () => {
+  const [isModalOpen, setModalOpen] = useState<boolean>(false);
+  const [selectedItem, setSelectedItem] = useState<unknown>(null);
   const { data: menu, status: menuStatus } = useAppSelector(
     (state) => state.menu
   );
+
+  const openModalWithItem = (item: unknown) => {
+    setSelectedItem(item);
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setSelectedItem(null);
+    setModalOpen(false);
+  };
 
   if (menuStatus === "loading") return <div>Loading...</div>;
   if (menuStatus === "failed") return <div>Error loading the menu.</div>;
@@ -54,7 +67,7 @@ const MenuCard: React.FC = () => {
                 <h3>{section.name}</h3>
               </MenuHeader>
               {section.items.map((item) => (
-                <MenuItem key={item.id}>
+                <MenuItem key={item.id} onClick={() => openModalWithItem(item)}>
                   <ItemInfo>
                     <h4>{item.name}</h4>
                     <p>{item.description}</p>
@@ -70,6 +83,11 @@ const MenuCard: React.FC = () => {
               ))}
             </div>
           ))}
+          <ProductModal
+            isOpen={isModalOpen}
+            onClose={closeModal}
+            selectedItem={selectedItem}
+          />
         </>
       )}
     </Card>
