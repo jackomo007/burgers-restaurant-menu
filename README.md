@@ -13,6 +13,7 @@ In an effort to maximize accessibility, the application has been deployed to an 
 ## Prerequisites
 
 To explore this MVP, ensure you have the following installed on your computer:
+
 - Node.js
 - npm (Node Package Manager)
 
@@ -21,24 +22,27 @@ To explore this MVP, ensure you have the following installed on your computer:
 To get started, follow these steps:
 
 1. Clone the repository:
-    ```bash
-    git clone https://github.com/your-username/burgers-restaurant-menu.git
-    ```
+
+   ```bash
+   git clone https://github.com/your-username/burgers-restaurant-menu.git
+   ```
 
 2. Navigate to the project directory:
-    ```bash
-    cd burgers-restaurant-menu
-    ```
+
+   ```bash
+   cd burgers-restaurant-menu
+   ```
 
 3. Install dependencies:
-    ```bash
-    npm install
-    ```
+
+   ```bash
+   npm install
+   ```
 
 4. Start the development server:
-    ```bash
-    npm run dev
-    ```
+   ```bash
+   npm run dev
+   ```
 
 Now, the project should be running on your local development server, ready for exploration and testing.
 
@@ -55,6 +59,7 @@ Now, the project should be running on your local development server, ready for e
 ## ⚙️ Technologies Employed
 
 This MVP leverages a robust stack of technologies, including:
+
 - **React.js**: For building the user interface with efficient, reusable components.
 - **Redux**: Employed for state management, ensuring a predictable state container for the app, which is crucial for future scalability.
 - **TypeScript**: Offers type safety, enhancing code quality and maintainability.
@@ -65,6 +70,7 @@ This MVP leverages a robust stack of technologies, including:
 ## 📈 Future Roadmap
 
 While this version showcases basic functionalities, the architecture is designed with growth in mind:
+
 - **Checkout Process**: Integration of a secure and user-friendly checkout system.
 - **User Profiles and Authentication**: Personalized user experiences with saved preferences and order history.
 - **Advanced Customization**: Allowing users to further customize their orders and the app's appearance, including theme colors.
@@ -72,23 +78,3 @@ While this version showcases basic functionalities, the architecture is designed
 - **PWA Transformation**: Leveraging the responsive design for a seamless transition to a Progressive Web App, enabling offline usage and home screen installation.
 
 ## 🤝 Url AWS
-
-
-<sub><i>
-
-## Important: Use of Mocked API in Development
-
-During local development and testing of this project, you might encounter issues when attempting to connect with the original restaurant API. Specifically, the API may return a `301 Moved Permanently` error, along with CORS (Cross-Origin Resource Sharing) related issues. This behavior prevents the application from correctly rendering the menu items and details of the restaurant in a local environment.
-
-To address this issue and ensure a smooth development experience, we have implemented a mocked API. This API simulates the expected responses from the original API, allowing the project to function correctly in development without the need to connect to the production API.
-
-When the project is deployed on AWS (in production), the original restaurant API is utilized, as the production environment is configured to circumvent the aforementioned issues.
-
-To use the mocked API in your local development environment, make sure to follow these additional steps after completing the initial installation and setup:
-
-1. Ensure that your development environment is configured to point to the mocked API. This is usually done in a configuration file or environment variables within the project.
-2. Verify that the mocked API is running or accessible before starting your local development server.
-
-This will ensure that you can develop and test the project without encountering connection issues with the original API.
-
-</i></sub>
