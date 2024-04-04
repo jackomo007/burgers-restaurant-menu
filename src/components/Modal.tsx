@@ -8,6 +8,7 @@ import {
   ModalContent,
   ModalWrapper,
   OptionsForm,
+  ModifierHeader,
   QuantityButton,
   QuantityInput,
   QuantityWrapper,
@@ -123,9 +124,18 @@ const ProductModal: React.FC<ProductModalProps> = ({
             {selectedItem.modifiers &&
               selectedItem.modifiers.map((modifier, modifierIndex) => (
                 <div key={modifierIndex}>
-                  {modifier.name}
+                  <ModifierHeader>
+                    <span>{modifier.name}</span>
+                    <p>Select 1 option</p>
+                  </ModifierHeader>
                   {modifier.items.map((option, index) => (
                     <SizeOptionLabel key={index}>
+                      <div>
+                        <span>{option.name}</span>
+                        <SizeOptionPrice>
+                          R$ {option.price.toFixed(2)}
+                        </SizeOptionPrice>
+                      </div>
                       <SizeOptionRadio
                         type="radio"
                         name="burgerSize"
@@ -137,10 +147,6 @@ const ProductModal: React.FC<ProductModalProps> = ({
                         }
                         onChange={() => handleSizeChange(option)}
                       />
-                      {option.name}
-                      <SizeOptionPrice>
-                        R$ {option.price.toFixed(2)}
-                      </SizeOptionPrice>
                     </SizeOptionLabel>
                   ))}
                 </div>
@@ -152,6 +158,7 @@ const ProductModal: React.FC<ProductModalProps> = ({
                 const newQuantity = quantity - 1;
                 newQuantity >= 0 && setQuantity(newQuantity);
               }}
+              data-icon="minus"
             >
               -
             </QuantityButton>
@@ -166,6 +173,7 @@ const ProductModal: React.FC<ProductModalProps> = ({
                 const newQuantity = quantity + 1;
                 setQuantity(newQuantity);
               }}
+              data-icon="plus"
             >
               +
             </QuantityButton>
