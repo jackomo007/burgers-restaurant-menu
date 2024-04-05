@@ -8,7 +8,7 @@ This project offers a glimpse into a potential future application for restaurant
 
 To ensure reliability and cater to a global audience, we've integrated unit tests using the React Testing Library and implemented comprehensive internationalization for texts, times/dates, and money formats. These enhancements not only improve the application's quality and user experience but also lay a solid foundation for scaling to different markets and user preferences.
 
-In an effort to maximize accessibility, the application has been deployed to an AWS S3 bucket, ensuring high availability and scalability. Additionally, the design is fully responsive, paving the way for this MVP to evolve into a Progressive Web App (PWA). This transformation would allow users on any mobile device to enjoy an app-like experience without the need to download a traditional application from an app store.
+Additionally, the design is fully responsive, paving the way for this MVP to evolve into a Progressive Web App (PWA). This transformation would allow users on any mobile device to enjoy an app-like experience without the need to download a traditional application from an app store.
 
 ## Prerequisites
 
@@ -33,13 +33,19 @@ To get started, follow these steps:
    cd burgers-restaurant-menu
    ```
 
-3. Install dependencies:
+3. Use the branch for development:
+
+   ```bash
+   git checkout develop
+   ```
+
+4. Install dependencies:
 
    ```bash
    npm install
    ```
 
-4. Start the development server:
+5. Start the development server:
    ```bash
    npm run dev
    ```
@@ -54,7 +60,7 @@ Now, the project should be running on your local development server, ready for e
 - **Basic User Interactions**: Engage with the menu and simulate the order process.
 - **Responsive Design**: Ensures an optimal viewing experience across a wide range of devices.
 - **Unit Testing**: Ensures reliability and stability through comprehensive tests using the React Testing Library.
-- **Internationalization**: Supports multiple languages, date/time formats, and currencies, enhancing user experience and accessibility for a global audience.
+- **Internationalization**: Supports multiple languages and currencies, enhancing user experience and accessibility for a global audience.
 
 ## ⚙️ Technologies Employed
 
@@ -76,5 +82,3 @@ While this version showcases basic functionalities, the architecture is designed
 - **Advanced Customization**: Allowing users to further customize their orders and the app's appearance, including theme colors.
 - **Expanded Menu and Features**: Introduction of more diverse menu options and interactive features.
 - **PWA Transformation**: Leveraging the responsive design for a seamless transition to a Progressive Web App, enabling offline usage and home screen installation.
-
-## 🤝 Url AWS
