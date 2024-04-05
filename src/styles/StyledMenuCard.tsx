@@ -64,7 +64,6 @@ export const ItemInfo = styled.div`
     }
 
     &:last-of-type {
-      font-weight: bold;
       font-size: 16px;
       color: ${({ theme }) => theme.textColorPrimary};
     }
@@ -87,4 +86,22 @@ export const Arrow = styled.i<ArrowProps>`
   border-width: 0 3px 3px 0;
   transform: ${({ isOpen }) => (isOpen ? "rotate(-135deg)" : "rotate(45deg)")};
   transition: transform 0.3s ease-in-out;
+`;
+
+export const TitleWithNumber = styled.h3`
+  display: flex;
+  align-items: center;
+`;
+
+export const Badge = styled.div`
+  width: 18px;
+  height: 18px;
+  margin-right: 8px;
+  background-color: ${({ theme }) => theme.primaryColour};
+  color: ${({ theme }) => theme.lightColor};
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
 `;

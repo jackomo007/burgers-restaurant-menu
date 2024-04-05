@@ -61,3 +61,48 @@ export const CartCard = styled.div`
     display: none;
   }
 `;
+
+export const FullScreenModal = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+`;
+
+export const ShowCartButton = styled.button`
+  background-color: ${({ theme }) => theme.primaryColour};
+  color: #fff;
+  padding: 10px 20px;
+  margin: 0 20px 20px;
+  border: none;
+  border-radius: 40px;
+  font-size: 1rem;
+  cursor: pointer;
+  width: calc(100% - 40px);
+  font-size: 18px;
+  font-weight: 500;
+  @media (min-width: 701px) {
+    display: none;
+  }
+`;
+
+export const AllergyInfo = styled.div`
+  color: ${({ theme }) => theme.primaryColour};
+  font-size: 16px;
+  font-weight: 500;
+  margin: 40px 0;
+  text-align: center;
+  cursor: pointer;
+  border-bottom: 2px solid ${({ theme }) => theme.primaryColour};
+  padding-bottom: 0px;
+  display: inline-block;
+  @media (min-width: 701px) {
+    display: none;
+  }
+`;

@@ -6,14 +6,18 @@ import {
   CartCard,
   TotalLabel,
   TotalValue,
+  CloseButton,
+  ShowCartButton,
 } from "../styles/StyledCart";
 
 const CartComponent = ({
   cartItems,
   total,
+  toggleFullScreenCart,
 }: {
   cartItems: CartItem[];
   total: number;
+  toggleFullScreenCart: () => void;
 }) => {
   const intl = useIntl();
 
@@ -21,7 +25,8 @@ const CartComponent = ({
   const emptyCartMessage = intl.formatMessage({ id: "emptyCart" });
 
   return (
-    <CartCard>
+    <CartCard onClick={(event) => event.stopPropagation()}>
+      <CloseButton onClick={() => toggleFullScreenCart()}>X</CloseButton>
       <h1>{cartTitle}</h1>
       {cartItems.length > 0 ? (
         <>
@@ -38,6 +43,7 @@ const CartComponent = ({
               />
             </TotalValue>
           </CardTotal>
+          <ShowCartButton>Checkout now</ShowCartButton>
         </>
       ) : (
         <p>{emptyCartMessage}</p>
